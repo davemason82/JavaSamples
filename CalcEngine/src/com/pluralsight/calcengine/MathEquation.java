@@ -3,8 +3,12 @@ package com.pluralsight.calcengine;
 public class MathEquation {
     private double leftVal;
     private double rightVal;
-    private char opCode = 'a';
+    private char opCode;
     private double result;
+
+    {
+        opCode = 'a';
+    }
 
     public double getLeftVal() { return leftVal; }
     public void setLeftVal(double leftVal) { this.leftVal = leftVal; }
