@@ -3,79 +3,25 @@ package com.pluralsight.calcengine;
 public class Main {
 
     public static void main(String[] args) {
+    	MathEquation[] equations = new MathEquation[4];
+        equations[0] = create(100.0d, 50.0d, 'd');
+        equations[1] = create(25.0d, 92.0d, 'a');
+        equations[2] = create(225.0d, 17.0d, 's');
+        equations[3] = create(11.0d, 3.0d, 'm');
 
-    	byte kVal = 5;
-    	byte factorial = 1;
+		for (MathEquation equation : equations) {
+            equation.execute();
+		    System.out.print("result = ");
+		    System.out.println(equation.result);
+        }
+    }
 
-    	while (kVal > 1) {
-    		factorial *= kVal--;
-		}
+    public static MathEquation create(double leftVal, double rightVal, char opCode) {
+        MathEquation equation = new MathEquation();
+        equation.leftVal = leftVal;
+        equation.rightVal = rightVal;
+        equation.opCode = opCode;
 
-		System.out.println(factorial);
-
-    	int iVal = 5;
-
-    	do {
-    		System.out.print(iVal);
-    		System.out.print(" * 2 = ");
-    		iVal *= 2;
-    		System.out.println(iVal);
-		} while (iVal < 100);
-
-    	float[] theVals = { 10.0f, 20.0f, 15.0f };
-		float sum = 0.0f;
-
-		for (int i = 0; i < theVals.length; i++)
-			sum += theVals[i];
-
-		for (float currentVal : theVals)
-			sum += currentVal;
-
-		System.out.println(sum);
-
-		int x = 11;
-
-		switch (x % 2) {
-			case 0:
-				System.out.print(x);
-				System.out.println(" is even.");
-				break;
-			case 1:
-				System.out.print(x);
-				System.out.println(" is odd.");
-				break;
-			default:
-				System.out.println("Opps it broke!");
-				break;
-		}
-
-	    double[] leftVals = { 100.0d, 25.0d, 225.0d, 11.0d };
-	    double[] rightVals = { 50.0d, 92.0d, 17.0d, 3.0d };
-	    char[] opCodes = { 'd', 'a', 's', 'm'};
-	    double[] results = new double[4];
-
-	    for (int i = 0; i < leftVals.length; i++)
-		{
-			switch (opCodes[i])
-			{
-				case 'a':
-					results[i] = leftVals[i] + rightVals[i];
-					break;
-				case 's':
-					results[i] = leftVals[i] - rightVals[i];
-					break;
-				case 'd':
-					results[i] = rightVals[i] > 0 ? leftVals[i] / rightVals[i]: 0.0d;
-					break;
-				case 'm':
-					results[i] = leftVals[i] / rightVals[i];
-					break;
-				default:
-					results[i] = 0.0d;
-			}
-		}
-
-		for (double theResult : results)
-			System.out.println(theResult);
+        return equation;
     }
 }
