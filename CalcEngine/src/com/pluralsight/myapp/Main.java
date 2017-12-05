@@ -1,4 +1,14 @@
-package com.pluralsight.calcengine;
+package com.pluralsight.myapp;
+
+
+import com.pluralsight.calcengine.Adder;
+import com.pluralsight.calcengine.CalculateBase;
+import com.pluralsight.calcengine.CalculateHelper;
+import com.pluralsight.calcengine.Divider;
+import com.pluralsight.calcengine.InvalidStatementException;
+import com.pluralsight.calcengine.MathEquation;
+import com.pluralsight.calcengine.Multiplier;
+import com.pluralsight.calcengine.Subtracter;
 
 public class Main {
 
@@ -7,6 +17,9 @@ public class Main {
     public static void main(String[] args) {
 
         String[] statements = {
+                "add 1.0",
+                "add xx 25.0",
+                "addX 0.0 0.0",
                 "divide 100.0 50.0",
                 "add 25.0 92.0",
                 "subtract 225.0 17.0",
@@ -15,8 +28,15 @@ public class Main {
 
         CalculateHelper helper = new CalculateHelper();
         for(String statement:statements) {
-            helper.process(statement);
-            System.out.println(helper);
+            try {
+                helper.process(statement);
+                System.out.println(helper);
+            } catch (InvalidStatementException e) {
+                System.out.println(e.getMessage());
+                if (e.getCause() != null) {
+                    System.out.println("   Original exception: " + e.getCause().getMessage());
+                }
+            }
         }
 
 
