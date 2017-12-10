@@ -5,9 +5,12 @@ import com.pluralsight.calcengine.Adder;
 import com.pluralsight.calcengine.CalculateBase;
 import com.pluralsight.calcengine.CalculateHelper;
 import com.pluralsight.calcengine.Divider;
+import com.pluralsight.calcengine.DynamicHelper;
 import com.pluralsight.calcengine.InvalidStatementException;
 import com.pluralsight.calcengine.MathEquation;
+import com.pluralsight.calcengine.MathProcessing;
 import com.pluralsight.calcengine.Multiplier;
+import com.pluralsight.calcengine.PowerOf;
 import com.pluralsight.calcengine.Subtracter;
 
 public class Main {
@@ -16,6 +19,24 @@ public class Main {
 
     public static void main(String[] args) {
 
+        // useCalculateHelper();
+
+        String[] statements = {
+                "add 25.0 92.0",
+                "power 5.0 2.0" // 5.0 ^ 2.0 = 25.0
+        };
+
+        DynamicHelper helper = new DynamicHelper(new MathProcessing[] {
+                new Adder(), new PowerOf()
+        });
+        for(String statement:statements) {
+            String output = helper.process(statement);
+            System.out.println(output);
+        }
+
+    }
+
+    static void useCalculateHelper() {
         String[] statements = {
                 "add 1.0",
                 "add xx 25.0",
@@ -46,19 +67,19 @@ public class Main {
         equations[2] = new MathEquation(225.0d, 17.0d, 's');
         equations[3] = new MathEquation(11.0d, 3.0d, 'm');
 
-		for (MathEquation equation : equations) {
+        for (MathEquation equation : equations) {
             equation.execute();
-		    System.out.print("result = ");
-		    System.out.println(equation.getResult());
+            System.out.print("result = ");
+            System.out.println(equation.getResult());
         }
 
         System.out.println();
-		System.out.println("Using overloads");
-		System.out.println();
+        System.out.println("Using overloads");
+        System.out.println();
 
-		double leftDouble = 9.0d;
-		double rightDouble = 4.0d;
-		MathEquation equationOverload = new MathEquation('d');
+        double leftDouble = 9.0d;
+        double rightDouble = 4.0d;
+        MathEquation equationOverload = new MathEquation('d');
 
         equationOverload.execute(leftDouble, rightDouble);
 
